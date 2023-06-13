@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Labb4___Library.Models.BookLoans>
+﻿@*@model IEnumerable<Labb4___Library.Models.BookLoans>*@
+
+@{
+    ViewData["Title"] = "MarkReturned";
+}
+
+<h1>List of book loans</h1>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to full list</a>
+        </p>
+    </div>
+</form>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Add new loan</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Return book</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customers.CustomerFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customers.CustomersLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loaned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsLoaned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsReturned)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*<form asp-action="MarkReturned" method="post">
+                        <input type="button" class="done-checkbox btn btn-primary" value="Return" />
+                        <input type="hidden" name="id" value="@item.IsLoaned = true" />
+                    </form>*@
+                    dont work fml
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customers.CustomerFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customers.CustomersLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Books.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Books.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loaned)
+                </td>
+                <td>
+                    @(item.IsLoaned ? "Yes" : "No")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsReturned)
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
